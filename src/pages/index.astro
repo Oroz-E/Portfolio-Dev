@@ -10,134 +10,699 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 	</head>
-	<body>
-		<header class="flex items-center justify-between p-6 bg-blue-500">
-			<div class="flex items-center">
-			  <img src="logo.png" alt="Logo" class="mr-6">
-			  <nav>
-				<ul class="flex">
-				  <li class="mr-6"><a href="#" class="text-white">Home</a></li>
-				  <li class="mr-6"><a href="#" class="text-white">About</a></li>
-				  <li class="mr-6"><a href="#" class="text-white">Contact</a></li>
-				</ul>
-			  </nav>
+	<body
+		class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"
+	>
+		<header
+			class="w-full backdrop-blur-md flex flex-row justify-items-center items-center gap-2 px-2 py-4 sm:justify-between sm:mx-auto lg:sticky lg:top-0 lg:px-0"
+			data-astro-transition-persist="astro-bsjmyv4d-2"
+		>
+			<div
+				class="max-w-4xl w-full mx-auto flex flex-row justify-center items-center gap-2 sm:justify-between"
+			>
+				<section class="hidden sm:block">
+					<a
+						href="/"
+						target="_self"
+						class="transition ease-in-out duration-200 text-slate-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 text-base"
+						><img
+							src="/_astro/favicon.8d41853f.ico"
+							title="Logo depicting my initials"
+							alt="Logo depicting my initials"
+							class="rounded-lg transition-all ease-in-out duration-200 hover:p-1 invert dark:invert-0"
+							width="40"
+							height="40"
+							loading="lazy"
+							decoding="async"
+						/></a>
+				</section><section>
+					<nav class="flex flex-row flex-wrap gap-8">
+						<a
+							href="/about"
+							target="_self"
+							class="transition ease-in-out duration-200 text-slate-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 text-lg"
+							>About</a
+						><a
+							href="/articles"
+							target="_self"
+							class="transition ease-in-out duration-200 text-slate-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 text-lg"
+							>Articles</a
+						><a
+							href="/experience"
+							target="_self"
+							class="transition ease-in-out duration-200 text-slate-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 text-lg"
+							>Experience</a
+						><a
+							href="/projects"
+							target="_self"
+							class="transition ease-in-out duration-200 text-slate-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 text-lg"
+							>Projects</a>
+					</nav>
+				</section><section class="hidden sm:block">
+					<a
+						id="theme-toggle"
+						class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+						target="_blank"
+						rel="noopener"
+						><svg
+							id="theme-toggle-dark-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-6 h-6 hidden"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+							></path></svg
+						><svg
+							id="theme-toggle-light-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-6 h-6"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+							></path></svg
+						></a
+					><script data-astro-exec="">
+						const themeToggleDarkIcon = document.getElementById(
+							"theme-toggle-dark-icon",
+						);
+						const themeToggleLightIcon = document.getElementById(
+							"theme-toggle-light-icon",
+						);
+						const themeToggleBtn =
+							document.getElementById("theme-toggle");
+						const prefersDarkMode = window.matchMedia(
+							"(prefers-color-scheme: dark)",
+						);
+
+						function toggleTheme(activeTheme) {
+							localStorage.setItem(STORAGE_KEY, activeTheme);
+
+							const isDarkMode = activeTheme === "dark";
+
+							document.documentElement.classList.toggle(
+								"dark",
+								isDarkMode,
+							);
+							document.documentElement.classList.toggle(
+								"light",
+								!isDarkMode,
+							);
+
+							themeToggleDarkIcon?.classList.toggle(
+								"hidden",
+								isDarkMode,
+							);
+							themeToggleLightIcon?.classList.toggle(
+								"hidden",
+								!isDarkMode,
+							);
+						}
+
+						if (
+							localStorage.getItem(STORAGE_KEY) === "dark" ||
+							(!localStorage[STORAGE_KEY] &&
+								prefersDarkMode.matches)
+						) {
+							themeToggleLightIcon?.classList.add("hidden");
+						} else {
+							themeToggleDarkIcon?.classList.add("hidden");
+						}
+
+						themeToggleBtn?.addEventListener("click", function () {
+							const activeTheme =
+								localStorage.getItem(STORAGE_KEY) === "dark"
+									? "light"
+									: "dark";
+
+							toggleTheme(activeTheme);
+						});
+
+						toggleTheme(
+							localStorage.getItem(STORAGE_KEY) ??
+								(prefersDarkMode.matches ? "dark" : "light"),
+						);
+
+						const theme = (() => {
+							if (
+								typeof localStorage !== "undefined" &&
+								localStorage.getItem(STORAGE_KEY)
+							) {
+								return localStorage.getItem(STORAGE_KEY);
+							}
+
+							if (
+								window.matchMedia(
+									"(prefers-color-scheme: dark)",
+								).matches
+							) {
+								return "dark";
+							}
+
+							return "light";
+						})();
+
+						window.localStorage.setItem(STORAGE_KEY, theme);
+
+						document.addEventListener(
+							"astro:after-swap",
+							function () {
+								if (
+									localStorage.getItem(STORAGE_KEY) === "dark"
+								)
+									document.documentElement.classList.toggle(
+										"dark",
+										true,
+									);
+							},
+						);
+					</script>
+				</section>
 			</div>
-			<div>
-			  <button class="bg-white text-blue-500 px-4 py-2 rounded">Sign Up</button>
-			</div>
-		  </header>
+		</header>
 		<section class="relative overflow-hidden py-32">
 			<div class="container">
-			  <div class="mx-auto flex max-w-5xl flex-col items-center">
-				<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none"
-				  class="absolute hidden opacity-25 [mask-image:linear-gradient(to_right,white,transparent,transparent,white)] lg:block">
-				  <g clip-path="url(#clip0_4_5)">
-					<rect width="1920" height="1080"></rect>
-					<line y1="49.5" x2="1920" y2="49.5" class="stroke-muted-foreground"></line>
-					<line y1="99.5" x2="1920" y2="99.5" class="stroke-muted-foreground"></line>
-					<line y1="149.5" x2="1920" y2="149.5" class="stroke-muted-foreground"></line>
-					<line y1="199.5" x2="1920" y2="199.5" class="stroke-muted-foreground"></line>
-					<line y1="249.5" x2="1920" y2="249.5" class="stroke-muted-foreground"></line>
-					<line y1="299.5" x2="1920" y2="299.5" class="stroke-muted-foreground"></line>
-					<line y1="349.5" x2="1920" y2="349.5" class="stroke-muted-foreground"></line>
-					<line y1="399.5" x2="1920" y2="399.5" class="stroke-muted-foreground"></line>
-					<line y1="449.5" x2="1920" y2="449.5" class="stroke-muted-foreground"></line>
-					<line y1="499.5" x2="1920" y2="499.5" class="stroke-muted-foreground"></line>
-					<line y1="549.5" x2="1920" y2="549.5" class="stroke-muted-foreground"></line>
-					<line y1="599.5" x2="1920" y2="599.5" class="stroke-muted-foreground"></line>
-					<line y1="649.5" x2="1920" y2="649.5" class="stroke-muted-foreground"></line>
-					<line y1="699.5" x2="1920" y2="699.5" class="stroke-muted-foreground"></line>
-					<line y1="749.5" x2="1920" y2="749.5" class="stroke-muted-foreground"></line>
-					<line y1="799.5" x2="1920" y2="799.5" class="stroke-muted-foreground"></line>
-					<line y1="849.5" x2="1920" y2="849.5" class="stroke-muted-foreground"></line>
-					<line y1="899.5" x2="1920" y2="899.5" class="stroke-muted-foreground"></line>
-					<line y1="949.5" x2="1920" y2="949.5" class="stroke-muted-foreground"></line>
-					<line y1="999.5" x2="1920" y2="999.5" class="stroke-muted-foreground"></line>
-					<line y1="1049.5" x2="1920" y2="1049.5" class="stroke-muted-foreground"></line>
-					<g clip-path="url(#clip1_4_5)">
-					  <line x1="49.6133" y1="3.99995" x2="49.7268" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="99.7275" y1="3.99995" x2="99.8411" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="149.841" y1="3.99995" x2="149.954" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="199.954" y1="3.99995" x2="200.068" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="250.067" y1="3.99995" x2="250.181" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="300.182" y1="3.99995" x2="300.295" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="350.295" y1="3.99995" x2="350.408" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="400.408" y1="3.99995" x2="400.522" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="450.521" y1="3.99995" x2="450.635" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="500.636" y1="3.99995" x2="500.749" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="550.749" y1="3.99995" x2="550.863" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="600.862" y1="3.99995" x2="600.976" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="650.976" y1="3.99995" x2="651.089" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="701.09" y1="3.99995" x2="701.203" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="751.203" y1="3.99995" x2="751.317" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="801.316" y1="3.99995" x2="801.43" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="851.43" y1="3.99995" x2="851.543" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="901.544" y1="3.99995" x2="901.657" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="951.657" y1="3.99995" x2="951.771" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1001.77" y1="3.99995" x2="1001.88" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1051.88" y1="3.99995" x2="1052" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1102" y1="3.99995" x2="1102.11" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1152.11" y1="3.99995" x2="1152.22" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1202.22" y1="3.99995" x2="1202.34" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1252.34" y1="3.99995" x2="1252.45" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1302.45" y1="3.99995" x2="1302.57" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1352.57" y1="3.99995" x2="1352.68" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1402.68" y1="3.99995" x2="1402.79" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1452.79" y1="3.99995" x2="1452.91" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1502.91" y1="3.99995" x2="1503.02" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1553.02" y1="3.99995" x2="1553.13" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1603.13" y1="3.99995" x2="1603.25" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1653.25" y1="3.99995" x2="1653.36" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1703.36" y1="3.99995" x2="1703.47" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1753.47" y1="3.99995" x2="1753.59" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1803.59" y1="3.99995" x2="1803.7" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1853.7" y1="3.99995" x2="1853.81" y2="1084" class="stroke-muted-foreground"></line>
-					  <line x1="1903.81" y1="3.99995" x2="1903.93" y2="1084" class="stroke-muted-foreground"></line>
-					</g>
-				  </g>
-				  <defs>
-					<clipPath id="clip0_4_5">
-					  <rect width="1920" height="1080" fill="#000000"></rect>
-					</clipPath>
-					<clipPath id="clip1_4_5">
-					  <rect width="1920" height="1080" fill="#000000" transform="tranzinc(-1 4)"></rect>
-					</clipPath>
-				  </defs>
-				</svg>
-				<div class="z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
-				  <div
-					class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">
-					New Release<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-					  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-					  class="lucide lucide-arrow-down-right ml-2 size-4">
-					  <path d="m7 7 10 10"></path>
-					  <path d="M17 7v10H7"></path>
+				<div class="mx-auto flex max-w-5xl flex-col items-center">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1920"
+						height="1080"
+						viewBox="0 0 1920 1080"
+						fill="none"
+						class="absolute hidden opacity-25 [mask-image:linear-gradient(to_right,white,transparent,transparent,white)] lg:block"
+					>
+						<g clip-path="url(#clip0_4_5)">
+							<rect width="1920" height="1080"></rect>
+							<line
+								y1="49.5"
+								x2="1920"
+								y2="49.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="99.5"
+								x2="1920"
+								y2="99.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="149.5"
+								x2="1920"
+								y2="149.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="199.5"
+								x2="1920"
+								y2="199.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="249.5"
+								x2="1920"
+								y2="249.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="299.5"
+								x2="1920"
+								y2="299.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="349.5"
+								x2="1920"
+								y2="349.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="399.5"
+								x2="1920"
+								y2="399.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="449.5"
+								x2="1920"
+								y2="449.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="499.5"
+								x2="1920"
+								y2="499.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="549.5"
+								x2="1920"
+								y2="549.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="599.5"
+								x2="1920"
+								y2="599.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="649.5"
+								x2="1920"
+								y2="649.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="699.5"
+								x2="1920"
+								y2="699.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="749.5"
+								x2="1920"
+								y2="749.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="799.5"
+								x2="1920"
+								y2="799.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="849.5"
+								x2="1920"
+								y2="849.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="899.5"
+								x2="1920"
+								y2="899.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="949.5"
+								x2="1920"
+								y2="949.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="999.5"
+								x2="1920"
+								y2="999.5"
+								class="stroke-muted-foreground"></line>
+							<line
+								y1="1049.5"
+								x2="1920"
+								y2="1049.5"
+								class="stroke-muted-foreground"></line>
+							<g clip-path="url(#clip1_4_5)">
+								<line
+									x1="49.6133"
+									y1="3.99995"
+									x2="49.7268"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="99.7275"
+									y1="3.99995"
+									x2="99.8411"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="149.841"
+									y1="3.99995"
+									x2="149.954"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="199.954"
+									y1="3.99995"
+									x2="200.068"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="250.067"
+									y1="3.99995"
+									x2="250.181"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="300.182"
+									y1="3.99995"
+									x2="300.295"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="350.295"
+									y1="3.99995"
+									x2="350.408"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="400.408"
+									y1="3.99995"
+									x2="400.522"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="450.521"
+									y1="3.99995"
+									x2="450.635"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="500.636"
+									y1="3.99995"
+									x2="500.749"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="550.749"
+									y1="3.99995"
+									x2="550.863"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="600.862"
+									y1="3.99995"
+									x2="600.976"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="650.976"
+									y1="3.99995"
+									x2="651.089"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="701.09"
+									y1="3.99995"
+									x2="701.203"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="751.203"
+									y1="3.99995"
+									x2="751.317"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="801.316"
+									y1="3.99995"
+									x2="801.43"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="851.43"
+									y1="3.99995"
+									x2="851.543"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="901.544"
+									y1="3.99995"
+									x2="901.657"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="951.657"
+									y1="3.99995"
+									x2="951.771"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1001.77"
+									y1="3.99995"
+									x2="1001.88"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1051.88"
+									y1="3.99995"
+									x2="1052"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1102"
+									y1="3.99995"
+									x2="1102.11"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1152.11"
+									y1="3.99995"
+									x2="1152.22"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1202.22"
+									y1="3.99995"
+									x2="1202.34"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1252.34"
+									y1="3.99995"
+									x2="1252.45"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1302.45"
+									y1="3.99995"
+									x2="1302.57"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1352.57"
+									y1="3.99995"
+									x2="1352.68"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1402.68"
+									y1="3.99995"
+									x2="1402.79"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1452.79"
+									y1="3.99995"
+									x2="1452.91"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1502.91"
+									y1="3.99995"
+									x2="1503.02"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1553.02"
+									y1="3.99995"
+									x2="1553.13"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1603.13"
+									y1="3.99995"
+									x2="1603.25"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1653.25"
+									y1="3.99995"
+									x2="1653.36"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1703.36"
+									y1="3.99995"
+									x2="1703.47"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1753.47"
+									y1="3.99995"
+									x2="1753.59"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1803.59"
+									y1="3.99995"
+									x2="1803.7"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1853.7"
+									y1="3.99995"
+									x2="1853.81"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+								<line
+									x1="1903.81"
+									y1="3.99995"
+									x2="1903.93"
+									y2="1084"
+									class="stroke-muted-foreground"></line>
+							</g>
+						</g>
+						<defs>
+							<clipPath id="clip0_4_5">
+								<rect width="1920" height="1080" fill="#000000"
+								></rect>
+							</clipPath>
+							<clipPath id="clip1_4_5">
+								<rect
+									width="1920"
+									height="1080"
+									fill="#000000"
+									transform="tranzinc(-1 4)"></rect>
+							</clipPath>
+						</defs>
 					</svg>
-				  </div>
-				  <div>
-					<h1 class="mb-6 text-pretty text-4xl font-bold lg:text-7xl">
-					  Hey, my name is Luis Oroz.
-					</h1>
-					<p class="text-zinc-600 lg:text-xl">
-						I'm a Software Engineer and aspiring entrepreneur living in Baja, and I love making things and having lots of side projects going on.
-					</p>
-				  </div>
-				  <div class="mt-4 flex justify-center">
-					<p class="text-sm text-zinc-600">
-					  Press<kbd
-						class="pointer-events-none mx-0.5 inline-flex h-5 select-none items-center rounded border bg-zinc-100 px-1.5 font-mono font-medium text-zinc-600 opacity-100">S</kbd>to
-					  get started
-					</p>
-				  </div>
-				  <div class="mt-20 flex flex-col items-center gap-4 lg:mt-40">
-					<p class="text-center: text-zinc-600 lg:text-left">
-					  Powering the next generation of digital products
-					</p>
-					<div class="flex flex-wrap items-center justify-center gap-8">
-						<section class="flex flex-row gap-2 items-left w-full"><a class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg" href="https://linkedin.com/in/mackjesse" target="_blank" rel="noopener" title="View My LinkedIn"><svg class="fill-gray-600 dark:fill-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a><a class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg" href="https://github.com/toxocious" target="_blank" rel="noopener" title="View My Github Profile"><svg class="fill-gray-600 dark:fill-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg></a><a class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg" href="https://twitter.com/toxocious" target="_blank" rel="noopener" title="View My Twitter"><svg class="fill-gray-600 dark:fill-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="none"><path opacity="0" d="M0 0h24v24H0z"></path><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></svg></a><a class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg" href="mailto:mackjessed@gmail.com" target="_blank" rel="noopener" title="Send Me An Email"><svg class="fill-gray-600 dark:fill-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z"></path></svg></a><a class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg" href="/resume/Jesse_Mack_Software_Engineer_Resume.pdf" target="_blank" rel="noopener" title="View My Resume"><svg class="fill-gray-600 dark:fill-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:auto;fill-rule:evenodd;clip-rule:evenodd" viewBox="0 0 6.827 6.827"><rect width="6.827" height="6.827" rx=".853" ry=".853" style="fill:rgba(255, 255, 255, 0)"></rect><path d="M1.573.853h2.502v1.072c0 .117.096.213.214.213H5.36v3.729a.107.107 0 0 1-.107.106h-3.68a.107.107 0 0 1-.106-.106V.96c0-.059.047-.107.106-.107zm.455 3.28h2.77v.16h-2.77v-.16zm0-.55h2.77v.16h-2.77v-.16zm0 1.098h2.77v.16h-2.77v-.16zm.588-1.951a.326.326 0 0 1-.32-.305.578.578 0 0 1-.002-.08c0-.122.038-.2.1-.25a.355.355 0 0 1 .221-.07l.007.001c.08.002.157.02.216.068.062.05.1.13.1.25a2.463 2.463 0 0 1-.003.08.335.335 0 0 1-.096.217.335.335 0 0 1-.22.089h-.003zm-.333-.148a.482.482 0 0 0-.169.163.568.568 0 0 0-.086.303v.009c0 .037.014.071.035.096a.124.124 0 0 0 .094.045h.918c.037 0 .07-.017.094-.045a.148.148 0 0 0 .035-.096v-.009a.568.568 0 0 0-.085-.3.483.483 0 0 0-.168-.165.354.354 0 0 1-.072.1.377.377 0 0 1-.596-.101zm2.006-.55a.107.107 0 0 1-.107-.107V.96a.107.107 0 0 1 .183-.076l.964.964a.107.107 0 0 1-.076.182H4.29zm-.877 1.04h1.374v.16H3.412v-.16zm.495-.38.144.046a.322.322 0 0 1-.11.179.313.313 0 0 1-.195.058.316.316 0 0 1-.24-.1.382.382 0 0 1-.094-.273c0-.122.031-.217.094-.284a.324.324 0 0 1 .25-.101c.089 0 .162.026.218.08a.288.288 0 0 1 .075.134l-.147.035a.154.154 0 0 0-.054-.09.155.155 0 0 0-.1-.033.167.167 0 0 0-.133.059c-.034.039-.05.102-.05.19 0 .092.016.158.05.197.033.04.076.06.13.06.039 0 .073-.013.101-.038a.219.219 0 0 0 .061-.118zm.458.27-.262-.733h.16l.186.543.18-.543h.157l-.263.733h-.158z"></path></svg></a></section>					</div>
-				  </div>
+					<div
+						class="z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center"
+					>
+						<div
+							class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground"
+						>
+							New Release<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="lucide lucide-arrow-down-right ml-2 size-4"
+							>
+								<path d="m7 7 10 10"></path>
+								<path d="M17 7v10H7"></path>
+							</svg>
+						</div>
+						<div>
+							<h1
+								class="w-full text-4xl mb-0 bg-gradient-to-r from-rose-500 to-violet-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-neutral-200"
+							>
+								Hey, my name is Luis Oroz.
+							</h1>
+							<p class="text-zinc-600 lg:text-xl">
+								I'm a Software Engineer and aspiring
+								entrepreneur living in Baja, and I love making
+								things and having lots of side projects going
+								on.
+							</p>
+						</div>
+						<div class="mt-4 flex justify-center">
+							<p class="text-sm text-zinc-600">
+								Press<kbd
+									class="pointer-events-none mx-0.5 inline-flex h-5 select-none items-center rounded border bg-zinc-100 px-1.5 font-mono font-medium text-zinc-600 opacity-100"
+									>S</kbd
+								>to get started
+							</p>
+						</div>
+						<div
+							class="mt-20 flex flex-col items-center gap-4 lg:mt-40"
+						>
+							<p class="text-center: text-zinc-600 lg:text-left">
+								Powering the next generation of digital products
+							</p>
+							<div
+								class="flex flex-wrap items-center justify-center gap-8"
+							>
+								<section
+									class="flex flex-row gap-2 items-left w-full"
+								>
+									<a
+										class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+										href="https://linkedin.com/in/mackjesse"
+										target="_blank"
+										rel="noopener"
+										title="View My LinkedIn"
+										><svg
+											class="fill-gray-600 dark:fill-neutral-400"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											><path
+												d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+											></path></svg
+										></a
+									><a
+										class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+										href="https://github.com/toxocious"
+										target="_blank"
+										rel="noopener"
+										title="View My Github Profile"
+										><svg
+											class="fill-gray-600 dark:fill-neutral-400"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											><path
+												d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+											></path></svg
+										></a
+									><a
+										class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+										href="https://twitter.com/toxocious"
+										target="_blank"
+										rel="noopener"
+										title="View My Twitter"
+										><svg
+											class="fill-gray-600 dark:fill-neutral-400"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											aria-hidden="true"
+											focusable="false"
+											role="none"
+											><path opacity="0" d="M0 0h24v24H0z"
+											></path><path
+												d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"
+											></path></svg
+										></a
+									><a
+										class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+										href="mailto:mackjessed@gmail.com"
+										target="_blank"
+										rel="noopener"
+										title="Send Me An Email"
+										><svg
+											class="fill-gray-600 dark:fill-neutral-400"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											><path
+												d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z"
+											></path></svg
+										></a
+									><a
+										class="cursor-pointer p-2 transition ease-in-out duration-200 flex justify-center rounded-lg text-neutral-600 hover:bg-rose-400 dark:text-neutral-400 dark:hover:bg-slate-700 hover:shadow-lg"
+										href="/resume/Jesse_Mack_Software_Engineer_Resume.pdf"
+										target="_blank"
+										rel="noopener"
+										title="View My Resume"
+										><svg
+											class="fill-gray-600 dark:fill-neutral-400"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:auto;fill-rule:evenodd;clip-rule:evenodd"
+											viewBox="0 0 6.827 6.827"
+											><rect
+												width="6.827"
+												height="6.827"
+												rx=".853"
+												ry=".853"
+												style="fill:rgba(255, 255, 255, 0)"
+											></rect><path
+												d="M1.573.853h2.502v1.072c0 .117.096.213.214.213H5.36v3.729a.107.107 0 0 1-.107.106h-3.68a.107.107 0 0 1-.106-.106V.96c0-.059.047-.107.106-.107zm.455 3.28h2.77v.16h-2.77v-.16zm0-.55h2.77v.16h-2.77v-.16zm0 1.098h2.77v.16h-2.77v-.16zm.588-1.951a.326.326 0 0 1-.32-.305.578.578 0 0 1-.002-.08c0-.122.038-.2.1-.25a.355.355 0 0 1 .221-.07l.007.001c.08.002.157.02.216.068.062.05.1.13.1.25a2.463 2.463 0 0 1-.003.08.335.335 0 0 1-.096.217.335.335 0 0 1-.22.089h-.003zm-.333-.148a.482.482 0 0 0-.169.163.568.568 0 0 0-.086.303v.009c0 .037.014.071.035.096a.124.124 0 0 0 .094.045h.918c.037 0 .07-.017.094-.045a.148.148 0 0 0 .035-.096v-.009a.568.568 0 0 0-.085-.3.483.483 0 0 0-.168-.165.354.354 0 0 1-.072.1.377.377 0 0 1-.596-.101zm2.006-.55a.107.107 0 0 1-.107-.107V.96a.107.107 0 0 1 .183-.076l.964.964a.107.107 0 0 1-.076.182H4.29zm-.877 1.04h1.374v.16H3.412v-.16zm.495-.38.144.046a.322.322 0 0 1-.11.179.313.313 0 0 1-.195.058.316.316 0 0 1-.24-.1.382.382 0 0 1-.094-.273c0-.122.031-.217.094-.284a.324.324 0 0 1 .25-.101c.089 0 .162.026.218.08a.288.288 0 0 1 .075.134l-.147.035a.154.154 0 0 0-.054-.09.155.155 0 0 0-.1-.033.167.167 0 0 0-.133.059c-.034.039-.05.102-.05.19 0 .092.016.158.05.197.033.04.076.06.13.06.039 0 .073-.013.101-.038a.219.219 0 0 0 .061-.118zm.458.27-.262-.733h.16l.186.543.18-.543h.157l-.263.733h-.158z"
+											></path></svg
+										></a>
+								</section>
+							</div>
+						</div>
+					</div>
 				</div>
-			  </div>
 			</div>
 		</section>
 	</body>
